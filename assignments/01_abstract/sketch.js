@@ -1,25 +1,22 @@
-let img;
-let smallPoint, largePoint;
+let x, y;
+let r, g, b;
 
-function preload() {
-  img = loadImage('01_abstract/ricardo.png');
+function setup(){
+  createCanvas(1280,720);
+  background(0);
 }
 
-function setup() {
-  createCanvas(720, 400);
-  smallPoint = 4;
-  largePoint = 40;
-  imageMode(CENTER);
-  noStroke();
-  background(255);
-  img.loadPixels();
-}
+function draw(){
+  if (mouseIsPressed){
+    r = random(0,255);
+    g = 5
+    b = random(0,255);
+    x = random(0,1280);
+    y = random(0,720);
+    ellipse(x,y,50,50);
+    fill(r,g,b, 100);
+    noStroke();
+    circle(x, y, 24)
+  }
 
-function draw() {
-  let pointillize = map(mouseX, 0, width, smallPoint, largePoint);
-  let x = floor(random(img.width));
-  let y = floor(random(img.height));
-  let pix = img.get(x, y);
-  fill(pix, 128);
-  ellipse(x, y, pointillize, pointillize);
 }
