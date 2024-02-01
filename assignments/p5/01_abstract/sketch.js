@@ -1,10 +1,3 @@
-let ricardo;
-
-let smallPoint, largePoint;
-
-function preload () {
-  ricardo = loadImage('ricardo.jpg');
-}
 
 function setup() {
  // put setup code here
