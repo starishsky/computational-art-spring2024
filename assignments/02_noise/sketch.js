@@ -3,24 +3,24 @@ let leon;
 let particles = [];
 const num = 2000;
 
-const noiseScale = 0.01;
+const noiseScale = 0.03;
 
 function preload(){
   leon = loadImage('leon.png')
 }
 function setup(){
-  createCanvas(2400,3000);
+  createCanvas(1200,1500);
+  background (0);
   // colorMode(RGB, 100);
   
   for(let i = 0; i < num; i++){
     particles.push(createVector(random(width), random(height)));
   }
-  stroke(0);
-  strokeWeight(2);
+  stroke(186, 122, 117);
+  strokeWeight(3);
 }
 
 function draw() {
-  
   background(92, 19, 19);
   
   //thing that shows the particles on the screen
@@ -37,12 +37,15 @@ function draw() {
     }
   }
   image (leon, 0, 0);
+  // image.resize(50,50);
   }
 
   //changes noise seed with mouse click
   function mouseReleased(){
     noiseSeed(millis());
   }
+
+  //put particles back on screen if they move off
   function onScreen(v) {
     return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
   }
