@@ -6,17 +6,21 @@ function setup(){
   background(0);
 }
 
-function draw(){
-  if (mouseIsPressed){
-    r = random(0,255);
-    g = 5
-    b = random(0,255);
-    x = random(0,1280);
-    y = random(0,720);
-    ellipse(x,y,50,50);
-    fill(r,g,b, 100);
-    noStroke();
-    circle(x, y, 24)
+function draw() {
+  let noiseLevel = 255;
+  let noiseScale = 0.009;
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      // Scale input coordinates.
+      let nx = noiseScale * x;
+      let ny = noiseScale * y;
+      let nt = noiseScale * frameCount;
+      // Compute noise value.
+      let c = noiseLevel * noise(nx, ny, nt);
+      // Render.
+      stroke(c);
+      point(x, y);
+    }
   }
 
 }
