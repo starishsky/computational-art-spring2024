@@ -1,26 +1,48 @@
-let x, y;
-let r, g, b;
+let leon;
 
+let particles = [];
+const num = 2000;
+
+const noiseScale = 0.01;
+
+function preload(){
+  leon = loadImage('leon.png')
+}
 function setup(){
-  createCanvas(1280,720);
-  background(0);
+  createCanvas(2400,3000);
+  // colorMode(RGB, 100);
+  
+  for(let i = 0; i < num; i++){
+    particles.push(createVector(random(width), random(height)));
+  }
+  stroke(0);
+  strokeWeight(2);
 }
 
 function draw() {
-  let noiseLevel = 255;
-  let noiseScale = 0.009;
-  for (let y = 0; y < height; y += 1) {
-    for (let x = 0; x < width; x += 1) {
-      // Scale input coordinates.
-      let nx = noiseScale * x;
-      let ny = noiseScale * y;
-      let nt = noiseScale * frameCount;
-      // Compute noise value.
-      let c = noiseLevel * noise(nx, ny, nt);
-      // Render.
-      stroke(c);
-      point(x, y);
+  
+  background(92, 19, 19);
+  
+  //thing that shows the particles on the screen
+  for(let i = 0; i < num; i++){
+    let p = particles[i];
+    point(p.x, p.y);
+    let n = noise(p.x * noiseScale, p.y * noiseScale);
+    //math that makes particles move
+    let a = TAU * n;
+    p.x += cos(a);
+    p.y += sin(a);
+    if(!onScreen(p)){
+      p.set(random(width), random(height));
     }
   }
+  image (leon, 0, 0);
+  }
 
-}
+  //changes noise seed with mouse click
+  function mouseReleased(){
+    noiseSeed(millis());
+  }
+  function onScreen(v) {
+    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
+  }
