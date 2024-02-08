@@ -1,9 +1,9 @@
 let leon;
 
 let particles = [];
-const num = 2000;
+const num = 5000;
 
-const noiseScale = 0.03;
+const noiseScale = 0.05;
 
 function preload(){
   leon = loadImage('leon.png')
@@ -16,8 +16,8 @@ function setup(){
   for(let i = 0; i < num; i++){
     particles.push(createVector(random(width), random(height)));
   }
-  stroke(186, 122, 117);
-  strokeWeight(3);
+  stroke(46, 5, 5);
+  strokeWeight(4);
 }
 
 function draw() {
