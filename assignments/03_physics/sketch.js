@@ -1,57 +1,50 @@
-let fish1;
-let fish2;
-let shark;
-let fishflakes;
+//apparently you can put all the variables in a big list like this. who knew.
+var mousePos,
+    pos,
+    target,
+    vel,
+    ctx,
+    rad,
+    drag,
+    speed;
 
-var fishX = 0;
-var fishY = random(370, 600);
+let colorArray;
+let ellipseColor;
 
-let rocks = [];
+function setup() {
+  createCanvas(windowWidth, windowHeight);  
 
-function preload(){
-  fish1 = loadImage('fish1.png');
-  fish2 = loadImage('fish2.png');
-  shark = loadImage('shark.png');
-  fishflakes = loadImage('fishflakes.png');
 
-  rock1 = loadImage('rock1.png');
-  rock2 = loadImage('rock2.png');
-  rock3 = loadImage('rock3.png');
-  // rocks = [rock1, rock2, rock3];
-}
-
-function setup(){
-  createCanvas(1280, 720);
+  noStroke();
+  background(16, 21, 30); 
+  
+  mousePos = createVector(0,0);
+  pos = createVector(0,0);
+  target = createVector(0,0);
+  vel = createVector(0,0);
+  
+  drag = 0.5
+  strength = 0.15;
+  //^^spring strength... maybe make this a dial later???
+  
+  r = 100; 
 }
 
 function draw() {
-  background (250);
+  background(0);  
+    
+  mousePos.set(mouseX, mouseY);
+  target = mousePos;
 
-  //fishes
-  fishX = fishX + 5;
-  image(fish1, fishX, 370, 75, 75);
-  image(fish2, fishX * 1.5, 600, 75, 75);
-  image(shark, fishX * 10, 500, 90, 90);
+  var force = p5.Vector.sub(target, pos);
+  force = force.mult(strength);
+  vel = vel.mult(drag);
+  vel = vel.add(force);  
+  pos = pos.add(vel);
 
-  if (fishX > width){
-    fishX = 0;
-  }
-
-  // image(rock1, mouseX, mouseY, 50, 50);
-
-  mouseClicked();
-  water();
-
+  let colorArray = [color(255, 0, 255), color(0, 255, 255), color(255, 255, 0)];
+  let ellipseColor = random(colorArray);
+  
+  fill(ellipseColor);
+  ellipse(pos.x, pos.y, r);
 }
-
-function mouseClicked() {
-  image(rock1, mouseX, mouseY, 50, 50);
-}
-
-function water(){
-  noStroke();
-  fill(161, 213, 255, 100);
-  rect(0, height/2, width, height/2);
-}
-
-
