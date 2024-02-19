@@ -1,51 +1,23 @@
-let leon;
+let fish1;
+let fish2;
+let shark;
 
-let particles = [];
-const num = 5000;
-
-const noiseScale = 0.05;
 
 function preload(){
-  leon = loadImage('leon.png')
+  fish1 = loadImage('fish1.png');
+  fish2 = loadImage('fish2.png');
+  shark = loadImage('shark.png');
 }
+
+
 function setup(){
-  createCanvas(1200,1500);
-  background (0);
-  // colorMode(RGB, 100);
+  createCanvas(1280, 720);
+  background (250);
   
-  for(let i = 0; i < num; i++){
-    particles.push(createVector(random(width), random(height)));
-  }
-  stroke(46, 5, 5);
-  strokeWeight(4);
 }
 
 function draw() {
-  background(92, 19, 19);
-  
-  //thing that shows the particles on the screen
-  for(let i = 0; i < num; i++){
-    let p = particles[i];
-    point(p.x, p.y);
-    let n = noise(p.x * noiseScale, p.y * noiseScale);
-    //math that makes particles move
-    let a = TAU * n;
-    p.x += cos(a);
-    p.y += sin(a);
-    if(!onScreen(p)){
-      p.set(random(width), random(height));
-    }
-  }
-  image (leon, 0, 0);
-  // image.resize(50,50);
-  }
-
-  //changes noise seed with mouse click
-  function mouseReleased(){
-    noiseSeed(millis());
-  }
-
-  //put particles back on screen if they move off
-  function onScreen(v) {
-    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
-  }
+  // noStroke();
+  fill(360, 60, 100, 0.5);
+  rect(0, height/2, width, height/2);
+}
