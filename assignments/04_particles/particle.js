@@ -24,9 +24,9 @@ class Particle{
     }
 
     show(){
-        stroke(255, this.lifetime);
+        stroke(204, 109, 41, this.lifetime);
         strokeWeight(2);
-        fill(255, this.lifetime);
+        fill(204, 109, 41, this.lifetime);
         ellipse(this.pos.x, this.pos.y, this.r*2);
     }
 }
