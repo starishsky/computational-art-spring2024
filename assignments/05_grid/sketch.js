@@ -28,6 +28,7 @@ function draw() {
       
       diameter = gridSize * (1 + sin(noiseValue * TWO_PI));
       //2pi is pi2 and used for sine to be twice the ratio of circ to dia
+      //also this makes the diameter follow the grid size along a sine curve and apply a noise value and blah blah
       
       ellipse(x, y, diameter, diameter);
       noStroke();
